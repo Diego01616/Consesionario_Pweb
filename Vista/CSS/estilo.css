@@ -1,0 +1,574 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+ body {
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+
+h2 {
+    text-align: center;
+}
+.cont h2 {
+    margin-bottom: 50px;
+}
+.content-menu{
+    position:fixed;
+    width: 100%;
+    margin-bottom: 10px;
+    height: 60px;
+    z-index: 1000;
+    background-color: black;  
+   
+}
+
+.menu-container{
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    top:30%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu-container .nav-principalmenu ul li{
+    float: left;
+}
+.menu-container .nav-principalmenu ul li a{
+    padding-right: 20px;
+    padding-left: 20px;
+    display: block;
+    color: grey;
+
+}
+.menu-container .nav-principalmenu ul li a:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    color: white;
+}
+
+.user-menu{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink:0;
+    position: relative;
+}
+
+
+
+
+.box-center-flotante{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    height: 150px;
+    border-radius: 40px;
+    padding: 20px;
+    background-color: rgb(190, 190, 190);
+    backdrop-filter: blur(50px);
+
+}
+
+
+
+/* Fondos */
+
+
+.divMajoradmin{
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+
+}
+.divMajor,
+.fondo,.fondo_prueba {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+.fondo_prueba{
+     background-color: rgba(170, 16, 16, 0.6); /* blanco transparente */
+    backdrop-filter: blur(4px); /* opcional para efecto de desenfoque */
+}
+
+.divMajoradmin {
+    background-image: url("../img/BackgorundAdmin.jpg");
+}
+.divMajor {
+    background-image: url("../img/backgroundMajor.png");
+}
+.fondo {
+    background-image: url("../img/backgroundMajor.png");
+}
+
+
+.pantalla-fondo{
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(36, 35, 35, 0.6); /* blanco transparente */
+    backdrop-filter: blur(4px); /* opcional para efecto de desenfoque */
+    z-index: 999; /* asegúrate de que esté por encima de todo */
+    display: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Íconos */
+.div-admin {
+    text-align: right;
+}
+.menu-icon{
+    height: 10px;
+}
+
+.icon-hover {
+    width: 20px;
+    height: 40px;
+    object-fit: contain;
+    cursor: pointer;
+}
+.icon-hover:hover {
+    scale: 1.1;
+}
+.icon-admin {
+    position: relative;
+    bottom: 5px;
+    margin-right: 5px;
+    width: 20px;
+    object-fit: contain;
+}
+
+/* Contenedor principal del formulario */
+.divlogin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    min-width: 300px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+
+    height: auto;
+    max-height: 90vh;
+}
+
+/* Formulario */
+.divlogin .form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    margin: 10px 10px 0;
+    width: 100%;
+}
+.contform{
+    margin:0px 40px 0px 40px; 
+}
+.resp-menuvar{
+    position: fix;
+    padding-top: 606px;
+
+}
+.center {
+    position: relative;
+    margin: 0px auto;
+    width: 500px;
+    padding-top: 60px;
+    border-radius: 20px;
+}
+.center .window-validation{
+    width: 500px;
+    height: 500px;
+    background-color: grey;
+}
+
+.data-users{
+    padding: 10px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    background-color: #E2E6E9;
+   
+}
+.formRegisterUsers{
+    padding: 10px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+}
+
+/* Grupos de formulario */
+form .form-group,
+form .form-group2 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+form .form-group2 {
+    font-weight: bold;
+    color: black;
+   
+}
+
+form .form2-group2 {
+    display: flex;
+    flex-direction: column;
+}
+
+.data-users .contentR input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(41, 51, 61, 0.5);
+    outline: none;
+}
+
+.contentR .form-group{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.contentR .form-group span{
+    display: flex;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.data-users .contentR{
+    display: relative;
+    margin: 10%;
+    padding: 4px;
+}
+
+.form-group .form-group-select{
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group .form-group-select select{
+    border-radius: 10px;
+    width: 60px;
+    outline: none;
+}
+.form-group .form-group-select input{
+    margin-left: 10px;
+    width: 100%;
+}
+.form-group .form-group-select .select_su{
+    padding: 10px;
+    width: 100%;
+    border: 1px solid rgba(41, 51, 61, 0.5);
+    outline: none;
+}
+
+.form-n{
+    display: flex;
+    margin-top: 40px;
+    color: green;
+    justify-content: space-between;
+}
+
+
+/* Textos e inputs */
+
+.title-form{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 25px;
+    color: #29333D;
+}
+
+.title-short{
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+
+
+.form-login span {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.form-login input,
+.form-login .inputAdmin {
+    height: 40px;
+    width: 100%;
+    text-align: left;
+    font-family: sans-serif;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    background-color: transparent;
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.form-login .inputAdmin::placeholder {
+    color: #aca8a7;
+}
+
+/* Botones */
+.form-login .buttonlogin .inicio,
+.form-login .buttonlogin2 .inicio {
+    font-size: medium;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: blueviolet;
+    transition: background-color 0.5s ease;
+  
+}
+.buttonlogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonlogin .inicio {
+    font-size: medium;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 50%;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: blue;
+    transition: background-color 0.4s ease;
+}
+.button-n{
+    font-size: medium;
+    width: 120px;
+    margin-right:20px;
+    height: 30px;
+    border-radius: 20px;
+    text-align: center;
+    color: rgb(231, 207, 207);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(131, 45, 211);
+    transition: background-color 0.4s ease;
+}
+
+.button-n:hover{
+    background-color: blue;
+    
+}
+
+
+.buttonlogin .inicio:hover {
+    background-color: green;
+}
+
+
+
+.form-login .buttonlogin .inicio {
+    margin-top: 50px;
+  
+}
+
+.form-login .buttonlogin .inicio:hover,
+.form-login .buttonlogin2 .inicio:hover {
+    background-color: blue;
+}
+
+/* Links */
+.form-group2 .hlink {
+    font-weight: bold;
+}
+
+.linktxt {
+    font-size: small;
+    color: white;
+}
+.divlinks-nouser{
+    text-align: center;
+   
+}
+
+.divlinks .link, .divlinks-nouser .link {
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-size: small;
+    color: white;
+    transition: color 0.5s ease;
+}
+
+.divlinks .link:hover, .divlinks-nouser .link:hover {
+    color: blueviolet;
+}
+.nav-sesion{
+    border-radius: 20px;
+    padding: 5px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: blueviolet;
+    transition: background-color 0.5s ease;
+}
+.nav-sesion:hover{
+    background-color: blue;
+}
+
+.user-menu .icon-vertical-menu{
+    background-image: url("../img/menu.png");
+    margin: 0;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background-size: cover;
+}
+
+
+.ul-vertical-menu{
+    display: none;
+    position: absolute;
+    top: 100%; 
+    right: 0px;
+    background-color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 0 0 20px 20px;
+    width: 120px;
+    z-index: 1000;
+    text-align: center;
+}
+
+.ul-vertical-menu li{
+    padding-bottom: 20px;
+}
+
+.ul-vertical-menu li a{
+    color: grey;
+    font-weight: bold;
+    
+}
+
+.ul-vertical-menu img{
+    width: 2px;
+    display: block;
+}
+
+
+.user-menu .ul-vertical-menu li a:hover{
+    color: white;
+}
+
+
+.nav-sesion-log{
+    border-radius: 20px;
+    padding: 5px;
+    outline: none;
+    color: white;
+    border: none;
+    background-color: blueviolet;
+   
+}
+
+
+/*samalls*/
+
+.small-red{
+    color: red;
+    position: absolute;
+    display: none;
+}
+
+.was-validated input:invalid~.small-red{
+    display: block;
+}
+.small-a{
+    color: red;
+    position: absolute;
+   
+}
+
+
+#password-msg {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+}
+
+#password-msg.valid {
+  color: green;
+}
+
+/* Media Queries: Ajustes para móviles */
+@media screen and (max-width: 768px) {
+    .divlogin {
+        width: 95%;
+        height: auto;
+        max-height: none;
+        padding: 15px;
+    }
+
+    .form-login {
+        flex-direction: column;
+        align-items: left;
+    }
+
+    .form-login input,
+    .form-login .inputAdmin,
+    .form-login .buttonlogin .inicio,
+    .form-login .buttonlogin2 .inicio {
+        width: 100%;
+    }
+
+    form .form-group,
+    form .form-group2 {
+        width: 100%;
+    }
+}
