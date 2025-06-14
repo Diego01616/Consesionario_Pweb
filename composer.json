@@ -1,0 +1,20 @@
+{
+    "name": "diego/proyecto",
+    "description": "consesionario de autos para proyecto de web",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Diego\\Proyecto\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diego01616",
+            "email": "diegobautista.letter1@gmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.10"
+    }
+}

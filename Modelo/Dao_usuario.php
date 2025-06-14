@@ -46,10 +46,32 @@ class Dao_usuario
         }
     }
 
+    public static function buscar_correo(){
+        $conexion = Conexion::conectar();
+        $correo =($_POST['correo']);
+        $check = $conexion->prepare("SELECT idusuario FROM usuario WHERE correo = ?");
+        $check->bind_param("s", $correo);
+        $check->execute();
+        $check->store_result();//almacena el resultado de la consulta para poder usar funciones como contar la cantidad de resultados
 
+        if ($check->num_rows == 0) {
+            echo json_encode(
+                [
+                    "status"=>"no encontrado"
+                ]
+                );
+            return; // correo no encontrado
+        }else if($check->num_rows == 1){
+            $check->bind_result($id);
+             $check->fetch();
+            echo json_encode([
+                "status" => "encontrado",
+                "id" => $id
+            ]);
+        }
 
-    public static function login()
-    {
+    }
+    public static function login(){
         session_start();
         $conexion = Conexion::conectar();
         $contraseña = ($_POST['contraseña']);
@@ -152,7 +174,10 @@ class Dao_usuario
         }*/
     
 
-
+    public static function reestablecer_clave(){
+        $conexion = Conexion::conectar();
+        $contraseña = ($_POST['contraseña']);
+    }
     public static function insertar_usaurio()
     {   
         $rol=3;
@@ -211,4 +236,6 @@ class Dao_usuario
             }
         }
     }
+
+   
 }

@@ -1,5 +1,6 @@
 <?php
 require_once '../Modelo/Dao_usuario.php';
+require_once '../Modelo/Envio_correo.php';
 
 $accion = $_POST['accion'] ?? '';
 $id = $_POST['id'] ?? null;
@@ -28,7 +29,12 @@ switch($accion){
             echo "error_rol";
         }
         break;
-
+    case 'recuperar':
+        Dao_usuario::buscar_correo();
+        break;
+    case 'enviar_codigo':
+        Envio_correo::enviar_correo();
+        break;       
     default:
         echo 'acción no especificada';    
 }
