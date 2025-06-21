@@ -1,3 +1,9 @@
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -63,10 +69,10 @@
             const password_confirm_Input = document.getElementById('confirm-password');
             const pwMsg = document.getElementById('password-msg');
             const pwMsgcon = document.getElementById('password-msg-confirm');
-            const cent = false;
+            let cent = false;
 
             passwordInput.addEventListener('input', () => {
-
+                
 
                 if (passwordInput.value.length >= 8) {
                     pwMsg.classList.add('valid');
@@ -82,11 +88,11 @@
             addform.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                if(comparar(passwordInput.value, password_confirm_Input.value)==true){
+                if(comparar(passwordInput.value, password_confirm_Input.value)==true && cent===true){
                     notyf.success("válidado");
                     const datos = new FormData(addform);
                     datos.append('accion','reestablecer');      
-                    fetch('../Controlador/Controlador_empleado.php',{
+                    fetch('../Controlador/Controlador_cliente.php',{
                         method: 'POST',
                         body: datos
                     })
@@ -97,19 +103,24 @@
                         return response.text();
                     })
                     .then(data=>{
-                        console.log("Respuesta del servidor:", data);
-
-
-
-
+                        console.log("Respuesta del servidor:", data); 
+                        if(data.includes("Contraseña actualizada")){
+                            notyf.success("contraseña actualizada, redirigiendo");
+                            //alert(data);
+                            setTimeout(()=>window.location.href=("Start_sesion.php"),2000 ) 
+                         
+                        }else {
+                            notyf.error("No se pudo actualizar la contraseña");
+                          //  alert(data);
+                        }
                         
                     })
-
-
-
+                    .catch(error=>{
+                        console.error(error);
+                       // alert(error);
+                    });
                 }else{
-                    notyf.error("los campos no concuerdan");
-
+                    notyf.error("los campos no concuerdan o contraseña insuficiente");
                 }
             });
 

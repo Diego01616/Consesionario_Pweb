@@ -39,5 +39,51 @@
             })
             .catch(err => console.error("No se pudo cargar el navbar:", err));
     </script>
+
+    <script>
+        const addform= document.getElementById('form-validation');
+        const codigo=document.getElementById('codigo');
+        addform.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const notyf = new Notyf({
+                duration: 3500,
+                position: {
+                    x: 'center',
+                    y: 'top'
+                    }
+            });
+            const datos =new FormData(addform);
+            datos.append('accion','verificar_codigo');
+            fetch('../Controlador/Controlador_cliente.php', {
+                method: 'POST',
+                body: datos
+            })
+            .then(response =>{
+                if(!response.ok)
+                throw new Error('Error al comprobar codigo');
+                return response.text();
+            })
+            .then (data=>{
+                console.log("Respuesta del servidor",data);
+                if(data.includes("Código confirmado")){
+                    setTimeout(() => {
+                    notyf.success("Código confirmado");
+                    
+                    }, 2000);
+                    window.location.href="Nueva_contraseña.php";
+                }else {
+                    notyf.error("Código no válido");
+                    notyf.error(" s "+data);
+                }
+            })
+            .catch(error=>{
+                console.error(error);
+                notyf.error("Fallo al comprobar la conexión, error inesperado del programa");
+            });
+
+        }) ;   
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 </body>
 </html>

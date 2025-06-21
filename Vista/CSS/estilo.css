@@ -79,7 +79,107 @@ h2 {
 
 }
 
+.Contenedor_completo {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color:  #E2E6E9;
+    align-items: center;
+    justify-content: flex-start;
+}
+.Contenedor_completoo {
+    position: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color:  #E2E6E9;
+    align-items: center;
+    justify-content: flex-start;
+}
+/*Listas*/
 
+
+.edit_users {
+    position: relative;
+    margin: 20px;
+    max-width: 1200px;
+    width: 90%;
+    height: 230px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.edit_user_content {
+    margin-top: 30px;
+    height: 80%;
+    width: 100%;
+    border-radius: 10px;
+
+}
+
+.edit_input_user{
+    font-size: 20px;
+    display: flex;  
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.edit_user_content .edit_input_user .item_user{
+    width: 22%;
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Los pone en columna, es decir, uno debajo del otro */
+    gap: 10px;
+}
+.edit_input_user input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(41, 51, 61, 0.5);
+    outline: none;
+}
+
+
+.lista{
+    position: relative;
+    margin: 75px auto 0 auto;
+    max-width: 1200px;
+    max-height: 600px;
+    padding: 20px;
+    width: 90%;
+    background-color: white;
+    height: auto; /* crece según contenido */
+    text-align: center;
+    overflow: auto;
+    border-radius: 20px;
+}
+
+.lista_usuario{
+    position: fixed;
+    width: 100%;
+}
+
+.user-table{
+    width: 100%;
+    margin-top: 40px;
+    border-radius: 20px;
+    background-color: white;
+    border-collapse: collapse;
+}
+.user-table thead{
+
+    font-size: 20px;
+    color: #55585c;
+}
+
+.user-table tr{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
 
 /* Fondos */
 
@@ -292,6 +392,18 @@ form .form2-group2 {
     justify-content: space-between;
 }
 
+.data-users .contentR .select_normal{
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+
 .form-group .form-group-select select{
     border-radius: 10px;
     width: 60px;
@@ -315,6 +427,15 @@ form .form2-group2 {
     justify-content: space-between;
 }
 
+
+.accion_edit{
+    margin-top: 20px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+
+}
 
 /* Textos e inputs */
 .title-form h2{
@@ -387,10 +508,119 @@ input:-webkit-autofill {
     transition: background-color 0.5s ease;
   
 }
+
+.button_normal{
+    font-size: medium;
+    height: 40px;
+    width: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: blue;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.button_normal:hover{
+    background-color: blueviolet;
+}
+
+
 .buttonlogin{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.buttonlist{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+
+}
+
+.buttonlist .press_cont{
+    font-size: medium;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: blueviolet ;
+    transition: background-color 0.4s ease;
+}
+
+.buttonlist .press_cont:hover{
+ 
+    background-color:  rgb(55, 16, 92);
+
+}
+
+.buttonlist .press_edit{
+    font-size: medium;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #1683b6 ;
+    transition: background-color 0.4s ease;
+}
+
+.buttonlist .press_edit:hover{
+ 
+    background-color:  #0b415a;
+
+}
+.buttonlist .press_del{
+    font-size: medium;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #1619b6 ;
+    transition: background-color 0.4s ease;
+}
+
+.buttonlist .press_add{
+    font-size: medium;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    width: 100%;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border: none;
+    background-color: #329b78;
+    transition: background-color 0.4s ease;
+}
+.buttonlist .press_add:hover{
+ 
+    background-color:  #47d4a8;
+
+}
+.buttonlist .press_del:hover{
+ 
+    background-color:  #0b205a;
+
 }
 
 .buttonlogin .inicio {
@@ -398,7 +628,7 @@ input:-webkit-autofill {
     margin-top: 20px;
     margin-bottom: 20px;
     height: 40px;
-    width: 50%;
+    width: 40%;
     border-radius: 20px;
     outline: none;
     cursor: pointer;

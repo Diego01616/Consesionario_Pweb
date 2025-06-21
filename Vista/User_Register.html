@@ -13,8 +13,6 @@
 
 <body>
    
-
-    
     <div class="center">
 
         <form class="formRegisterUsers" id="form-validation" action="" novalidate>
@@ -103,8 +101,7 @@
             });
             
        
-            addform.addEventListener('submit', (e) => {
-                
+            addform.addEventListener('submit', (e) => { 
                 var notyf = new Notyf({
                     duration: 3500,
                     position:{
@@ -155,7 +152,7 @@
                 const datos = new FormData(addform);
                 datos.append('accion','insertar');
 
-                fetch('../Controlador/Controlador_empleado.php', {
+                fetch('../Controlador/Controlador_cliente.php', {
                     method: 'POST',
                     body: datos 
                 })
@@ -169,14 +166,18 @@
                         console.log("Respuesta del servidor:", data);
 
                         if(data.includes("Usuario registrado")){
-                            notyf.success('datos enviados');
-                            addform.reset();
-                            addform.classList.remove('was-validated');
+                            notyf.success("Datos registrados");
+                            setTimeout(() => {  
+                                addform.reset();
+                                addform.classList.remove('was-validated');
+                                window.location.href=("Start_sesion.php");
+                            }, 2000);
                         }else if(data.includes("El ID o el correo ya están registrados en la base de datos.")){
                             notyf.error(data);
                            // addform.reset();//limpia el formulario
                         }else if(data.includes("Error al registrar")){
                             notyf.error(data);
+                            alert(data);
                         }
                     })
                     .catch(error=>{

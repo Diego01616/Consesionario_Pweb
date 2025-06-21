@@ -1,23 +1,21 @@
 <?php 
-require_once '../Modelo/Dao_empleado.php';
+require_once '../Modelo/Dao_sucursal.php';
 
 $accion = $_POST['accion'] ?? '';
 $id = $_POST['id'] ?? null;
-$rol= $_POST['rol'] ?? '';
 
 switch($accion){
     case 'insertar':
-        Dao_empleado::insertar_empleado();
+        Dao_sucursal::insertar_sucursal();
         break;
     case 'actualizar':
-        Dao_empleado::actualizar();
+       Dao_sucursal::actualizar();
         break;    
     case 'eliminar':
-        Dao_empleado::eliminar();
+        Dao_sucursal::eliminar();
         break;    
     default:
         echo 'acción no especificada';
 }
-
 
 ?>

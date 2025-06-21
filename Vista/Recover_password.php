@@ -64,47 +64,56 @@
             if (!isValid) return;
             const datos = new FormData(addform);
             datos.append('accion', 'recuperar');
-            fetch('../Controlador/Controlador_empleado.php', {
+            fetch('../Controlador/Controlador_cliente.php', {
                     method: 'POST',
                     body: datos
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al encontrar el correo');
+                    return response.text(); // ← importante: json, no text
+                })
                 .then(data => {
-                    if (data.status === "encontrado") {
-                        console.log("ID encontrado:", data.id);
-                        notyf.success("Se envió un código a tu correo y el id es:"+data.id);
-                        setTimeout(() => {
-                            const dato =new FormData(addform);
-                            dato.append('accion','enviar_codigo');
-                            fetch('../Controlador/Controlador_empleado.php', {
-                                method: 'POST',
-                                body: dato
-                            })
-                            .then(resp=>{
-                                
-                            })
+                    if (data.includes("encontrado")) {
+                        console.log("ID encontrado:");
+                        notyf.success('correo encontrado');
+                            const dato = new FormData(addform);
+                            dato.append('accion', 'enviar_codigo');
+                            fetch('../Controlador/Controlador_cliente.php', {
+                                    method: 'POST',
+                                    body: dato
+                                })
+                                .then(resp => {
 
+                                    if (!resp.ok) 
+                                    throw new Error('Error al enviar los datos');
+                                    return resp.text();
+                                }).then (dat =>{
+                                    console.log("Respuesta del servidor: " + dat);
+                                    if(dat.includes('envio exitoso')){
+                                        //notyf.success("Se envió un código a tu correo. ID: "+dat);
+                                       // setTimeout(() => {
+                                            window.location.href = "Codigo_recuperacion.php";
+                                        //}, 2000);
+                                    }
 
+                                })
 
-
-
-                            window.location.href = "Nav.php";
-                        }, 2000);
+                                .catch(er =>{
+                                     notyf.error('Error inesperado: ' + er.message);
+                                })
 
                     } else {
-                        notyf.error("No se encontro nada");
+                        notyf.error("No se encontró el correo");
                     }
                 })
                 .catch(error => {
-                    //alert('paila todo '+ error.message);
-                    notyf.error('error inesperado' + error.message);
+                    notyf.error('Error inesperado: ' + error.message);
                     addform.reset();
                 });
 
 
         });
     </script>
-
 
 
     <script>

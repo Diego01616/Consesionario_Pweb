@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="divlinks">
-                        <a href="https://www.youtube.com" class="link">Olvidé mi contraseña</a>
+                        <a href="Recover_password.php" class="link">Olvidé mi contraseña</a>
                     </div>
 
                     <div class="buttonlogin">
@@ -112,7 +112,7 @@
                 const datos = new FormData(addform);
                 datos.append('accion', 'ingresar_usuario');
 
-                fetch('../Controlador/Controlador_empleado.php', {
+                fetch('../Controlador/Controlador_cliente.php',{
                         method: 'POST',
                         body: datos
                     })
@@ -152,7 +152,7 @@
                                                 datos.append('accion', 'rol_seleccionado');
                                                 datos.append('rol', valor);
 
-                                                fetch('../Controlador/Controlador_empleado.php', {
+                                                fetch('../Controlador/Controlador_cliente.php', {
                                                         method: 'POST',
                                                         body: datos
                                                     })
@@ -164,9 +164,9 @@
                                                         console.log("Respuesta del servidor: " + dat);
                                                         if (dat.includes('rol_ok')) {
                                                             notyf.success('Rol seleccionado, redirigiendo...');
-                                                            setTimeout(() => {
+                                                           // setTimeout(() => {
                                                                 window.location.href = "Nav.php";
-                                                            }, 2000);
+                                                          //  }, 2000);
                                                         } else {
                                                             notyf.error('No se pudo seleccionar el rol');
                                                         }
@@ -183,7 +183,7 @@
                                     console.error(error);
                                 });
                         } else {
-                            notyf.error(data + " Alerta inesperada");
+                            notyf.error("Usuario o contraseña incorrectos");
                         }
                     })
                     .catch(error => {

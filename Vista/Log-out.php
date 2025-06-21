@@ -1,6 +1,8 @@
 <?php
 // log-out.php
-session_start();          // Asegúrate de iniciar la sesión
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}        // Asegúrate de iniciar la sesión
 
 // 1. Vaciar todas las variables de sesión
 $_SESSION = [];

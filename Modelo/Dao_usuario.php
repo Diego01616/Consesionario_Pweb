@@ -1,8 +1,8 @@
 <?php
-
 include_once 'Usuario.php';
 include_once 'Conexion.php';
-
+include_once 'Usuario.php';
+//$resp=Dao_usuario::lista_usuario();
 class Dao_usuario
 {
 
@@ -54,20 +54,18 @@ class Dao_usuario
         $check->execute();
         $check->store_result();//almacena el resultado de la consulta para poder usar funciones como contar la cantidad de resultados
 
-        if ($check->num_rows == 0) {
-            echo json_encode(
-                [
-                    "status"=>"no encontrado"
-                ]
-                );
-            return; // correo no encontrado
-        }else if($check->num_rows == 1){
+        if ($check->num_rows === 0) {
+            echo ("no");
+          
+            return; 
+        }else if($check->num_rows === 1){
+            session_start();
             $check->bind_result($id);
-             $check->fetch();
-            echo json_encode([
-                "status" => "encontrado",
-                "id" => $id
-            ]);
+            $check->fetch();
+            $correo_rcover='';
+            $_SESSION['cor_cover']=$correo_rcover;
+            $_SESSION['id_rec']=$id;
+            echo ("encontrado");
         }
 
     }
@@ -145,38 +143,23 @@ class Dao_usuario
             exit();
         }
     }    
-
-        /*
-        este else reemplazaba al actual cuando recibia solo una tupla y/o cogia la primera
-        else {
-            echo "Inicio de sesión exitoso";
-            $sql = "SELECT u.nombre,u.idusuario,u.contraseña,u.correo,ur.rol_idrol FROM usuario as u JOIN usuario_rol as ur on (ur.usuario_idusuario=u.idUsuario) WHERE correo = ?";
-            
-            $stmt = $conexion->prepare($sql);
-            $stmt->bind_param("s", $correo);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
-
-            // Aquí inicializas $usuario con la fila del resultado
-            $usuario = $resultado->fetch_assoc();
-
-            $_SESSION['usuario'] = [
-                'id' => $usuario['idusuario'],
-                'nombre' => $usuario['nombre'],
-                'email' => $usuario['correo'],
-                'rol'=> $usuario['rol_idrol']
-            ];
-            return true;
-   
-          
-           // header("Location: Nav.php");
-            exit();
-        }*/
     
-
     public static function reestablecer_clave(){
+        session_start();
         $conexion = Conexion::conectar();
-        $contraseña = ($_POST['contraseña']);
+        $contraseña = ($_POST['password']);
+        $id =$_SESSION['id_rec'];
+        $contraseñahash = password_hash($contraseña,PASSWORD_DEFAULT);
+        $sql ="UPDATE usuario set contraseña = ? where idUsuario = ?";
+        $stmt = $conexion->prepare($sql);
+        //echo("Contraseña actualizada".$id);
+        $stmt ->bind_param("si",$contraseñahash,$id);
+        if($stmt->execute()){
+            echo("Contraseña actualizada");
+            unset($_SESSION['id_rec']);
+        }else{
+            echo("No se pudo actualizar");
+        }       
     }
     public static function insertar_usaurio()
     {   
@@ -237,5 +220,63 @@ class Dao_usuario
         }
     }
 
-   
+    public static function actualizar(){
+        $conexion = Conexion::conectar();
+        $id = ($_POST['id']);
+        $nombre = ($_POST['nombre']);
+        $apellido = ($_POST['apellido']);
+        $correo = ($_POST['correo']);
+        $telefono = ($_POST['telefono']);
+
+        $stmt = $conexion->prepare("UPDATE usuario SET nombre = ? ,apellido= ?, correo=?,telefono=? where idUsuario=?");
+        $stmt->bind_param("ssssi",$nombre,$apellido,$correo,$telefono,$id);
+        if($stmt->execute()){
+            echo('actualizado');
+        }else{
+            echo('no');
+        }
+    }
+
+    public static function eliminar(){
+        $conexion = Conexion::conectar();
+        $rol=3;
+        $id = ($_POST['id']);
+        $stmt = $conexion->prepare("DELETE from usuario_rol where usuario_idusuario=? && rol_idrol=?");
+        $stmt2= $conexion->prepare("DELETE from usuario where idusuario=?");
+        $stmt->bind_param("ii",$id,$rol);
+        $stmt2->bind_param("i",$id);
+        if($stmt->execute() && $stmt2->execute()){
+            echo('eliminado');
+        }else{
+            echo('no');
+        }
+    }
+
+   public static function lista_usuario(){
+    $conexion = Conexion::conectar();
+    $result =$conexion->query("SELECT u.idUsuario, u.nombre, u.apellido, u.correo, u.telefono FROM usuario AS u
+                                    WHERE u.idUsuario NOT IN (SELECT usuario_idusuario FROM usuario_rol WHERE rol_idrol = 1)");
+    $usuarios = [];
+
+    while ($fila = $result->fetch_assoc()){
+        $usuarios [] = Usuario::list_user(
+            $fila['idUsuario'],
+            $fila['nombre'],
+            $fila['apellido'],
+            $fila['correo'],
+            $fila['telefono']   
+        );
+
+    }
+    /*FORMA DE SABER QUE TRAE EL OBJETO CORRER LA VARIABLE DEL PRINCIPIO DE DOCUMENTO
+    header('Content-Type: application/json');
+    echo json_encode([
+        'status' => 'listados',
+        'usuarios' => $usuarios
+    ]);
+    exit;*/
+    //echo("listados");
+    return $usuarios;
+
+   }
 }

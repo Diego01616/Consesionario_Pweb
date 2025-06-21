@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_SESSION['roles'])) {
     echo "<div class='title-form'><a>Selecciona tu rol</a></div>";
     echo "<form class='form-n'>";
